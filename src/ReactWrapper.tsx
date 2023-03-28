@@ -1,20 +1,27 @@
 import React, { useEffect, useState } from "react";
-import { getThemeData } from "./api";
+import {
+  getComponentStyles,
+  getThemeData,
+  TypeTarget,
+  TypeThemeData,
+} from "./api";
 
 export default function ComponentWrapper({ instanceId, children }) {
-  let [themeItemData, setThemeItemData] = useState();
+  let [themeItemData, setThemeItemData] = useState<TypeTarget | undefined>();
 
   useEffect(() => {
-    let data = getThemeData().then((resData: []) => {
+    let data = getThemeData().then((resData: TypeThemeData) => {
       setThemeItemData(
-        resData.find((themeItem) => themeItem.instanceId === instanceId)
+        resData.targets.find(
+          (themeTarget: TypeTarget) => themeTarget.instanceId === instanceId
+        )
       );
     });
   }, []);
 
   return (
     <>
-      <style jsx>{getComponentStyles(themeItemData)}</style>
+      <style scoped>{getComponentStyles({ themeItemData })}</style>
       {children}
     </>
   );

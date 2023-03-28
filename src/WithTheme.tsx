@@ -1,6 +1,7 @@
 import React from "react";
 import NextComponentWrapper from "./NextWrapper.server";
 import ReactWrapper from "./ReactWrapper";
+import { StyleHTMLAttributes } from "../types";
 
 export function WithTheme(Child) {
   return (props) => {
@@ -8,7 +9,13 @@ export function WithTheme(Child) {
 
     return () => (
       <Wrapper instanceId={props.instanceId} tag={props.tag}>
-        <Child {...props} />
+        <Child
+          {...props}
+          {...{
+            "data-theme-tag": props.tag,
+            "data-theme-id": props.instanceId,
+          }}
+        />
       </Wrapper>
     );
   };

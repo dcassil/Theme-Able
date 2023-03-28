@@ -1,7 +1,7 @@
-export function getThemeData() {
-  let promise = new Promise((resolve) => {
+export async function getThemeData() {
+  let promise = await new Promise<TypeThemeData>((resolve) => {
     setTimeout(() => {
-      resolve(testData);
+      resolve(testData["userThemeRed"]);
     }, 100);
   });
 
@@ -63,4 +63,9 @@ const testData: Record<string, TypeThemeData> = {
     ],
   },
 };
-``;
+
+let data = { ...testData };
+
+export function setThemeData(newData: Record<string, TypeThemeData>) {
+  data = { ...newData };
+}

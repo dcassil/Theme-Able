@@ -1,4 +1,4 @@
-export declare function getThemeData(): Promise<unknown>;
+export declare function getThemeData(): Promise<TypeThemeData>;
 export declare function getComponentStyles({ themeItemData, }: {
     themeItemData: TypeTarget;
 }): string;
@@ -15,3 +15,4 @@ export type TypeThemeData = {
     name: string;
     targets: TypeTarget[];
 };
+export declare function setThemeData(newData: Record<string, TypeThemeData>): void;
